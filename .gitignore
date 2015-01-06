@@ -1,10 +1,6 @@
-*.py~
-*.pyc
-*/__pycache__/*
 *.sw?
 *~
 *.log
 *.log.*
+*.class
 *.bak
-dist/
-build/
