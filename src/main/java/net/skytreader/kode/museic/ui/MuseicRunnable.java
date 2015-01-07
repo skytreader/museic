@@ -19,8 +19,9 @@ public class MuseicRunnable implements Runnable{
     private JProgressBar seekBar;
     private JTextField delayField;
 
-    private final int DEFAULT_WIDTH = 500;
-    private final int DEFAULT_HEIGHT = 500;
+    private final int DEFAULT_DELAY = 4;
+    private final int DEFAULT_HEIGHT = 400;
+    private final int DEFAULT_WIDTH = 400;
     
     @Override
     public void run(){
@@ -45,7 +46,7 @@ public class MuseicRunnable implements Runnable{
 
         JPanel delayPanel = new JPanel();
         JLabel delayIndicatorLabel = new JLabel("Delay (in seconds): ");
-        delayField = new JTextField(2);
+        delayField = new JTextField("" + DEFAULT_DELAY, 2);
         delayPanel.add(delayIndicatorLabel);
         delayPanel.add(delayField);
         mainFrameContainer.add(delayPanel);
