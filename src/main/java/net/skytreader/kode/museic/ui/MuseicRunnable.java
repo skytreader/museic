@@ -78,6 +78,7 @@ public class MuseicRunnable implements Runnable{
 
         JPanel controlPanel = new JPanel();
         JButton play = new JButton("Play");
+        play.addActionListener(new PlayListener());
         JButton pause = new JButton("Pause");
         JButton stop = new JButton("Stop");
         controlPanel.add(play);
@@ -104,6 +105,19 @@ public class MuseicRunnable implements Runnable{
     private class PlayListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
+            // Countdown first...
+            int delay = Integer.parseInt(delayField.getText());
+            for(int i = 0; i < delay; i++){
+                countdownLabel.setText("Playing in: " + (delay - i));
+                countdownLabel.repaint();
+                try{
+                    Thread.sleep(1000);
+                } catch(InterruptedException ie){
+                    ie.printStackTrace();
+                }
+            }
+
+            countdownLabel.setText("Playing in: Now Playing");
         }
     }
 
