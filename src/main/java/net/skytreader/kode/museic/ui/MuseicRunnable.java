@@ -2,9 +2,16 @@ package net.skytreader.kode.museic.ui;
 
 import java.awt.Container;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Component;
+
+import java.io.File;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,7 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class MuseicRunnable implements Runnable{
+    private Component parentComponent;
     
+    private JFileChooser mp3Chooser = new JFileChooser();
     private JFrame mainFrame;
     private JLabel filePathLabel;
     private JProgressBar seekBar;
@@ -35,11 +44,13 @@ public class MuseicRunnable implements Runnable{
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         Container mainFrameContainer = mainFrame.getContentPane();
+        parentComponent = mainFrameContainer;
         mainFrameContainer.setLayout(new BoxLayout(mainFrameContainer, BoxLayout.Y_AXIS));
 
         JPanel filePanel = new JPanel();
         JButton filePrompt = new JButton("Choose MP3 file");
-        filePathLabel = new JLabel("Currently playing: ");
+        filePrompt.addActionListener(new ChooseMP3Listener());
+        filePathLabel = new JLabel("Playing: None");
         filePanel.add(filePrompt);
         filePanel.add(filePathLabel);
         mainFrameContainer.add(filePanel);
@@ -64,6 +75,18 @@ public class MuseicRunnable implements Runnable{
         mainFrameContainer.add(controlPanel);
 
         mainFrame.setVisible(true);
+    }
+
+    private class ChooseMP3Listener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            int resultVal = mp3Chooser.showOpenDialog(parentComponent);
+
+            if(resultVal == JFileChooser.APPROVE_OPTION){
+                File f = mp3Chooser.getSelectedFile();
+                filePathLabel.setText("Playing: " + f.getName());
+            }
+        }
     }
 
 }
