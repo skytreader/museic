@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class MuseicRunnable implements Runnable{
@@ -16,6 +17,7 @@ public class MuseicRunnable implements Runnable{
     private JFrame mainFrame;
     private JLabel filePathLabel;
     private JProgressBar seekBar;
+    private JTextField delayField;
 
     private final int DEFAULT_WIDTH = 500;
     private final int DEFAULT_HEIGHT = 500;
@@ -40,6 +42,13 @@ public class MuseicRunnable implements Runnable{
         filePanel.add(filePrompt);
         filePanel.add(filePathLabel);
         mainFrameContainer.add(filePanel);
+
+        JPanel delayPanel = new JPanel();
+        JLabel delayIndicatorLabel = new JLabel("Delay (in seconds): ");
+        delayField = new JTextField(2);
+        delayPanel.add(delayIndicatorLabel);
+        delayPanel.add(delayField);
+        mainFrameContainer.add(delayPanel);
 
         seekBar = new JProgressBar();
         mainFrameContainer.add(seekBar);
