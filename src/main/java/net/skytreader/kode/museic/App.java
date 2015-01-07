@@ -1,27 +1,18 @@
 package net.skytreader.kode.museic;
 
-import javafx.embed.swing.JFXPanel;
+import java.awt.EventQueue;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import net.skytreader.kode.museic.core.DelayPlayer;
+import net.skytreader.kode.museic.ui.MuseicRunnable;
 
 /**
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args ) throws Exception
-    {
-        if(args.length != 2){
-            System.out.println("Please supply mp3 file to play and delay in seconds.");
-            System.exit(1);
-        }
+public class App{
+    
+    public static final String APP_NAME = "Museic";
 
-        int delay = Integer.parseInt(args[1]);
-        DelayPlayer dp = new DelayPlayer(delay);
-        dp.play(args[0]);
+    public static void main(String[] args) throws Exception{
+        EventQueue.invokeLater(new MuseicRunnable());
     }
 }
