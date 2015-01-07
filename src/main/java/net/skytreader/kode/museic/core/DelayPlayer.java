@@ -23,7 +23,9 @@ public class DelayPlayer{
 
         Media mp3 = new Media(fileURI);
         MediaPlayer player = new MediaPlayer(mp3);
-        Thread.sleep(delay);
+        System.out.println("Sleeping for " + delay);
+        Thread.sleep(delay * 1000);
+        System.out.println("Will now play...");
         player.play();
     }
 
