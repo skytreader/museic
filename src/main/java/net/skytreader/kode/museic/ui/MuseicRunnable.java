@@ -8,6 +8,8 @@ import java.awt.Component;
 
 import java.io.File;
 
+import javafx.embed.swing.JFXPanel;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import javax.swing.UIManager;
 
 public class MuseicRunnable implements Runnable{
     private Component parentComponent;
+    private String filePathState;
     
     private JFileChooser mp3Chooser = new JFileChooser();
     private JFrame mainFrame;
@@ -31,6 +34,10 @@ public class MuseicRunnable implements Runnable{
     private final int DEFAULT_DELAY = 4;
     private final int DEFAULT_HEIGHT = 400;
     private final int DEFAULT_WIDTH = 400;
+
+    public MuseicRunnable(){
+        JFXPanel foo = new JFXPanel();
+    }
     
     @Override
     public void run(){
@@ -85,6 +92,7 @@ public class MuseicRunnable implements Runnable{
             if(resultVal == JFileChooser.APPROVE_OPTION){
                 File f = mp3Chooser.getSelectedFile();
                 filePathLabel.setText("Playing: " + f.getName());
+                filePathState = f.getAbsolutePath();
             }
         }
     }
