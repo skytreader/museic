@@ -1,4 +1,4 @@
-package net.skytreader.kode;
+package net.skytreader.kode.museic;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -16,6 +16,7 @@ public class App
             System.exit(1);
         }
 
+        System.out.println(args[0]);
         Media mp3 = new Media(args[0]);
         MediaPlayer player = new MediaPlayer(mp3);
         player.play();
