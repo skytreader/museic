@@ -1,5 +1,7 @@
 package net.skytreader.kode.museic;
 
+import javafx.embed.swing.JFXPanel;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -15,6 +17,8 @@ public class App
             System.out.println("Please supply mp3 file to play.");
             System.exit(1);
         }
+
+        JFXPanel foo = new JFXPanel();
 
         System.out.println(args[0]);
         Media mp3 = new Media(args[0]);
