@@ -27,6 +27,7 @@ public class MuseicRunnable implements Runnable{
     
     private JFileChooser mp3Chooser = new JFileChooser();
     private JFrame mainFrame;
+    private JLabel countdownLabel;
     private JLabel filePathLabel;
     private JProgressBar seekBar;
     private JTextField delayField;
@@ -69,6 +70,9 @@ public class MuseicRunnable implements Runnable{
         delayPanel.add(delayField);
         mainFrameContainer.add(delayPanel);
 
+        countdownLabel = new JLabel("Playing in: NA");
+        mainFrameContainer.add(countdownLabel);
+
         seekBar = new JProgressBar();
         mainFrameContainer.add(seekBar);
 
@@ -94,6 +98,12 @@ public class MuseicRunnable implements Runnable{
                 filePathLabel.setText("Playing: " + f.getName());
                 filePathState = f.getAbsolutePath();
             }
+        }
+    }
+
+    private class PlayListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae){
         }
     }
 
