@@ -104,33 +104,46 @@ public class MuseicRunnable implements Runnable{
         }
     }
 
+    private class TimerStoppable{
+        private Timer countdownTimer;
+
+        public TimerStoppable(int delay){
+            countdownTimer = new Timer(DELAY_MS_UNIT, new CountdownTimerListener(delay, this));
+        }
+
+        public void startTimer(){
+            countdownTimer.start();
+        }
+        public void stopTimer(){
+            countdownTimer.stop();
+        }
+    }
+
     private class PlayListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
             // Countdown first...
             int delay = Integer.parseInt(delayField.getText());
-            Timer countdownTimer = new Timer(DELAY_MS_UNIT, new CountdownTimerListener(delay));
-            countdownTimer.start();
-            try{
-                Thread.sleep(delay * DELAY_MS_UNIT);
-            } catch(InterruptedException ie){
-                ie.printStackTrace();
-            }
-            countdownTimer.stop();
-
-            countdownLabel.setText("Playing in: Now Playing");
+            TimerStoppable ts = new TimerStoppable(delay);
+            ts.startTimer();
         }
     }
 
     private class CountdownTimerListener implements ActionListener{
         private int start;
+        private TimerStoppable stopper;
 
-        public CountdownTimerListener(int start){
+        public CountdownTimerListener(int start, TimerStoppable stopper){
             this.start = start;
+            this.stopper = stopper;
         }
 
         @Override
         public void actionPerformed(ActionEvent ae){
+            if(start == 0){
+                stopper.stopTimer();
+                countdownLabel.setText("Playing in: Now Playing");
+            }
             countdownLabel.setText("Playing in: " + start);
             start--;
         }
