@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 
 public class MuseicRunnable implements Runnable{
@@ -33,6 +34,7 @@ public class MuseicRunnable implements Runnable{
     private JTextField delayField;
 
     private final int DEFAULT_DELAY = 4;
+    private final int DELAY_MS_UNIT = 1000;
     private final int DEFAULT_HEIGHT = 400;
     private final int DEFAULT_WIDTH = 400;
 
@@ -107,17 +109,30 @@ public class MuseicRunnable implements Runnable{
         public void actionPerformed(ActionEvent ae){
             // Countdown first...
             int delay = Integer.parseInt(delayField.getText());
-            for(int i = 0; i < delay; i++){
-                countdownLabel.setText("Playing in: " + (delay - i));
-                countdownLabel.repaint();
-                try{
-                    Thread.sleep(1000);
-                } catch(InterruptedException ie){
-                    ie.printStackTrace();
-                }
+            Timer countdownTimer = new Timer(DELAY_MS_UNIT, new CountdownTimerListener(delay));
+            countdownTimer.start();
+            try{
+                Thread.sleep(delay * DELAY_MS_UNIT);
+            } catch(InterruptedException ie){
+                ie.printStackTrace();
             }
+            countdownTimer.stop();
 
             countdownLabel.setText("Playing in: Now Playing");
+        }
+    }
+
+    private class CountdownTimerListener implements ActionListener{
+        private int start;
+
+        public CountdownTimerListener(int start){
+            this.start = start;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            countdownLabel.setText("Playing in: " + start);
+            start--;
         }
     }
 
