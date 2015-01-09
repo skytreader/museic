@@ -141,11 +141,12 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             if(start == 0){
-                stopper.stopTimer();
                 countdownLabel.setText("Playing in: Now Playing");
+                stopper.stopTimer();
+            } else{
+                countdownLabel.setText("Playing in: " + start);
+                start--;
             }
-            countdownLabel.setText("Playing in: " + start);
-            start--;
         }
     }
 
