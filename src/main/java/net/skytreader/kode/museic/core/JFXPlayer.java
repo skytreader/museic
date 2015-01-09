@@ -5,27 +5,22 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class DelayPlayer{
-    
-    private int delay;
+public class JFXPlayer{
 
     /**
     Construct a new DelayPlayer with the delay specified in seconds.
     */
-    public DelayPlayer(int delay){
-        this.delay = delay;
+    public JFXPlayer(){
         JFXPanel foo = new JFXPanel();
     }
 
-    public void play(String filepath) throws InterruptedException{
+    @Override
+    public void play(String filepath){
         String spaceEscape = filepath.replace(" ", "%20");
         String fileURI = "file://" + spaceEscape;
 
         Media mp3 = new Media(fileURI);
         MediaPlayer player = new MediaPlayer(mp3);
-        System.out.println("Sleeping for " + delay);
-        Thread.sleep(delay * 1000);
-        System.out.println("Will now play...");
         player.play();
     }
 
