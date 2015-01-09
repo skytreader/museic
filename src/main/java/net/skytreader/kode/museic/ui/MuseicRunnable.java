@@ -22,6 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
+import net.skytreader.kode.museic.core.JFXPlayer;
+import net.skytreader.kode.museic.core.Player;
+
 public class MuseicRunnable implements Runnable{
     private Component parentComponent;
     private String filePathState;
@@ -33,6 +36,8 @@ public class MuseicRunnable implements Runnable{
     private JProgressBar seekBar;
     private JTextField delayField;
 
+    private Player museicPlayer;
+
     private final int DEFAULT_DELAY = 4;
     private final int DELAY_MS_UNIT = 1000;
     private final int DEFAULT_HEIGHT = 400;
@@ -40,6 +45,7 @@ public class MuseicRunnable implements Runnable{
 
     public MuseicRunnable(){
         JFXPanel foo = new JFXPanel();
+        museicPlayer = new JFXPlayer();
     }
     
     @Override
@@ -142,6 +148,7 @@ public class MuseicRunnable implements Runnable{
         public void actionPerformed(ActionEvent ae){
             if(start == 0){
                 countdownLabel.setText("Playing in: Now Playing");
+                museicPlayer.play(filePathState);
                 stopper.stopTimer();
             } else{
                 countdownLabel.setText("Playing in: " + start);

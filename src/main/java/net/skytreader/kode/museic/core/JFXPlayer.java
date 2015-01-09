@@ -5,7 +5,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class JFXPlayer{
+public class JFXPlayer implements Player{
 
     /**
     Construct a new DelayPlayer with the delay specified in seconds.
