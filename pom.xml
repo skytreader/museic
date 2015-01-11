@@ -4,7 +4,7 @@
   <groupId>net.skytreader.kode</groupId>
   <artifactId>museic</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <name>museic</name>
   <url>http://maven.apache.org</url>
 

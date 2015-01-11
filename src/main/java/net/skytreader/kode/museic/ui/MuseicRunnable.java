@@ -50,11 +50,6 @@ public class MuseicRunnable implements Runnable{
     
     @Override
     public void run(){
-        try{
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(Exception e){
-            e.printStackTrace();
-        }
 
         mainFrame = new JFrame(net.skytreader.kode.museic.App.APP_NAME);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
