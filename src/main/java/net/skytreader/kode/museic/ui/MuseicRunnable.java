@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import net.skytreader.kode.museic.core.JFXPlayer;
 import net.skytreader.kode.museic.core.Player;
 
@@ -29,12 +31,15 @@ public class MuseicRunnable implements Runnable{
     private Component parentComponent;
     private String filePathState;
     
-    private JFileChooser mp3Chooser = new JFileChooser();
+    private JFileChooser mp3Chooser;
     private JFrame mainFrame;
     private JLabel countdownLabel;
     private JLabel filePathLabel;
     private JProgressBar seekBar;
     private JTextField delayField;
+
+    private FileNameExtensionFilter mp3Filter = new FileNameExtensionFilter(
+      "MP3 Files", "mp3");
 
     private Player museicPlayer;
 
@@ -46,6 +51,8 @@ public class MuseicRunnable implements Runnable{
     public MuseicRunnable(){
         JFXPanel foo = new JFXPanel();
         museicPlayer = new JFXPlayer();
+        mp3Chooser = new JFileChooser();
+        mp3Chooser.setFileFilter(mp3Filter);
     }
     
     @Override
