@@ -31,15 +31,15 @@ public class MuseicRunnable implements Runnable{
     private Component parentComponent;
     private String filePathState;
     
+    private JButton pause;
+    private JButton play;
+    private JButton stop;
     private JFileChooser mp3Chooser;
     private JFrame mainFrame;
     private JLabel countdownLabel;
     private JLabel filePathLabel;
     private JProgressBar seekBar;
     private JTextField delayField;
-
-    private FileNameExtensionFilter mp3Filter = new FileNameExtensionFilter(
-      "MP3 Files", "mp3");
 
     private Player museicPlayer;
 
@@ -52,6 +52,8 @@ public class MuseicRunnable implements Runnable{
         JFXPanel foo = new JFXPanel();
         museicPlayer = new JFXPlayer();
         mp3Chooser = new JFileChooser();
+        FileNameExtensionFilter mp3Filter = new FileNameExtensionFilter(
+          "MP3 Files", "mp3");
         mp3Chooser.setFileFilter(mp3Filter);
     }
     
@@ -87,10 +89,13 @@ public class MuseicRunnable implements Runnable{
         mainFrameContainer.add(seekBar);
 
         JPanel controlPanel = new JPanel();
-        JButton play = new JButton("Play");
+        play = new JButton("Play");
         play.addActionListener(new PlayListener());
-        JButton pause = new JButton("Pause");
-        JButton stop = new JButton("Stop");
+        play.setEnabled(false);
+        pause = new JButton("Pause");
+        pause.setEnabled(false);
+        stop = new JButton("Stop");
+        stop.setEnabled(false);
         controlPanel.add(play);
         controlPanel.add(pause);
         controlPanel.add(stop);
@@ -108,6 +113,9 @@ public class MuseicRunnable implements Runnable{
                 File f = mp3Chooser.getSelectedFile();
                 filePathLabel.setText("Playing: " + f.getName());
                 filePathState = f.getAbsolutePath();
+                play.setEnabled(true);
+                pause.setEnabled(true);
+                stop.setEnabled(true);
             }
         }
     }
