@@ -48,6 +48,11 @@ public class MuseicRunnable implements Runnable{
     private final int DEFAULT_HEIGHT = 400;
     private final int DEFAULT_WIDTH = 400;
 
+    // Label prefixes
+    private final String FILEPATH_INDICATOR_LBL = "Loaded: ";
+    private final String DELAY_CONFIG_LBL = "Delay (in seconds): ";
+    private final String COUNTDOWN_LBL = "Playing in: ";
+
     public MuseicRunnable(){
         JFXPanel foo = new JFXPanel();
         museicPlayer = new JFXPlayer();
@@ -70,19 +75,19 @@ public class MuseicRunnable implements Runnable{
         JPanel filePanel = new JPanel();
         JButton filePrompt = new JButton("Choose MP3 file");
         filePrompt.addActionListener(new ChooseMP3Listener());
-        filePathLabel = new JLabel("Playing: None");
+        filePathLabel = new JLabel(FILEPATH_INDICATOR_LBL + "None");
         filePanel.add(filePrompt);
         filePanel.add(filePathLabel);
         mainFrameContainer.add(filePanel);
 
         JPanel delayPanel = new JPanel();
-        JLabel delayIndicatorLabel = new JLabel("Delay (in seconds): ");
+        JLabel delayIndicatorLabel = new JLabel(DELAY_CONFIG_LBL);
         delayField = new JTextField("" + DEFAULT_DELAY, 2);
         delayPanel.add(delayIndicatorLabel);
         delayPanel.add(delayField);
         mainFrameContainer.add(delayPanel);
 
-        countdownLabel = new JLabel("Playing in: NA");
+        countdownLabel = new JLabel(COUNTDOWN_LBL + "NA");
         mainFrameContainer.add(countdownLabel);
 
         seekBar = new JProgressBar();
@@ -111,7 +116,7 @@ public class MuseicRunnable implements Runnable{
 
             if(resultVal == JFileChooser.APPROVE_OPTION){
                 File f = mp3Chooser.getSelectedFile();
-                filePathLabel.setText("Playing: " + f.getName());
+                filePathLabel.setText(FILEPATH_INDICATOR_LBL + f.getName());
                 filePathState = f.getAbsolutePath();
                 play.setEnabled(true);
                 pause.setEnabled(true);
@@ -157,11 +162,11 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             if(start == 0){
-                countdownLabel.setText("Playing in: Now Playing");
+                countdownLabel.setText(COUNTDOWN_LBL + "Now Playing");
                 museicPlayer.play(filePathState);
                 stopper.stopTimer();
             } else{
-                countdownLabel.setText("Playing in: " + start);
+                countdownLabel.setText(COUNTDOWN_LBL + start);
                 start--;
             }
         }
