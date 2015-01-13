@@ -150,6 +150,20 @@ public class MuseicRunnable implements Runnable{
         }
     }
 
+    private class PauseListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            museicPlayer.pause();
+        }
+    }
+
+    private class StopListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            museicPlayer.stop();
+        }
+    }
+
     private class CountdownTimerListener implements ActionListener{
         private int start;
         private TimerStoppable stopper;
@@ -163,7 +177,11 @@ public class MuseicRunnable implements Runnable{
         public void actionPerformed(ActionEvent ae){
             if(start == 0){
                 countdownLabel.setText(COUNTDOWN_LBL + "Now Playing");
-                museicPlayer.play(filePathState);
+                if(museicPlayer.getCurrentStatus() == Player.STATUS_PAUSED){
+                    museicPlayer.play();
+                } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
+                    museicPlayer.play(filePathState);
+                }
                 stopper.stopTimer();
             } else{
                 countdownLabel.setText(COUNTDOWN_LBL + start);
