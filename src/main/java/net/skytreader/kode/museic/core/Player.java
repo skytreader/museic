@@ -6,6 +6,16 @@ Players are stateful objects.
 @author Chad Estioco
 */
 public interface Player{
+    
+    public static final int STATUS_STOPPED = 0;
+    public static final int STATUS_PLAYING = 1;
+    public static final int STATUS_PAUSED = 2;
+
+    /**
+    Return the state of this player, see constants STATUS_STOPPED, STATUS_PLAYING,
+    and STATUS_PAUSED.
+    */
+    public int getCurrentStatus();
     /**
     Play the mp3 file indicated in the filepath.
     */

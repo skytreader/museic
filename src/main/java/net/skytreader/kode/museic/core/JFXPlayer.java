@@ -7,12 +7,14 @@ import javafx.scene.media.MediaPlayer;
 
 public class JFXPlayer implements Player{
     private MediaPlayer player;
+    private int currentStatus;
 
     /**
     Construct a new DelayPlayer with the delay specified in seconds.
     */
     public JFXPlayer(){
         JFXPanel foo = new JFXPanel();
+        currentStatus = Player.STATUS_STOPPED;
     }
 
     @Override
@@ -23,6 +25,7 @@ public class JFXPlayer implements Player{
         Media mp3 = new Media(fileURI);
         MediaPlayer player = new MediaPlayer(mp3);
         player.play();
+        currentStatus = Player.STATUS_PLAYING;
     }
 
     @Override
@@ -30,17 +33,25 @@ public class JFXPlayer implements Player{
         if(player == null){
         } else{
             player.play();
+            currentStatus = Player.STATUS_PLAYING;
         }
     }
 
     @Override
     public void pause(){
         player.pause();
+        currentStatus = Player.STATUS_PAUSED;
     }
 
     @Override
     public void stop(){
         player.stop();
+        currentStatus = Player.STATUS_STOPPED;
+    }
+
+    @Override
+    public int getCurrentStatus(){
+        return currentStatus;
     }
 
 }
