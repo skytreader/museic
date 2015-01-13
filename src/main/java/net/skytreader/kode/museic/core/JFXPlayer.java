@@ -23,7 +23,7 @@ public class JFXPlayer implements Player{
         String fileURI = "file://" + spaceEscape;
 
         Media mp3 = new Media(fileURI);
-        MediaPlayer player = new MediaPlayer(mp3);
+        player = new MediaPlayer(mp3);
         player.play();
         currentStatus = Player.STATUS_PLAYING;
     }

@@ -99,7 +99,9 @@ public class MuseicRunnable implements Runnable{
         play.setEnabled(false);
         pause = new JButton("Pause");
         pause.setEnabled(false);
+        pause.addActionListener(new PauseListener());
         stop = new JButton("Stop");
+        stop.addActionListener(new StopListener());
         stop.setEnabled(false);
         controlPanel.add(play);
         controlPanel.add(pause);
@@ -107,6 +109,33 @@ public class MuseicRunnable implements Runnable{
         mainFrameContainer.add(controlPanel);
 
         mainFrame.setVisible(true);
+    }
+    
+    /**
+    Call this whenever the status of the Player is STATUS_STOPPED.
+    */
+    private void setButtonsStopped(){
+        play.setEnabled(true);
+        pause.setEnabled(false);
+        stop.setEnabled(false);
+    }
+
+    /**
+    Call this whenever the status of the Player is STATUS_PLAYING.
+    */
+    private void setButtonsPlaying(){
+        play.setEnabled(false);
+        pause.setEnabled(true);
+        stop.setEnabled(true);
+    }
+
+    /**
+    Call this whenever the status of the Player is STATUS_PAUSED.
+    */
+    private void setButtonsPaused(){
+        play.setEnabled(true);
+        pause.setEnabled(false);
+        stop.setEnabled(true);
     }
 
     private class ChooseMP3Listener implements ActionListener{
@@ -118,9 +147,7 @@ public class MuseicRunnable implements Runnable{
                 File f = mp3Chooser.getSelectedFile();
                 filePathLabel.setText(FILEPATH_INDICATOR_LBL + f.getName());
                 filePathState = f.getAbsolutePath();
-                play.setEnabled(true);
-                pause.setEnabled(true);
-                stop.setEnabled(true);
+                setButtonsStopped();
             }
         }
     }
@@ -154,6 +181,7 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             museicPlayer.pause();
+            setButtonsPaused();
         }
     }
 
@@ -161,6 +189,7 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             museicPlayer.stop();
+            setButtonsStopped();
         }
     }
 
@@ -182,6 +211,7 @@ public class MuseicRunnable implements Runnable{
                 } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
                     museicPlayer.play(filePathState);
                 }
+                setButtonsPlaying();
                 stopper.stopTimer();
             } else{
                 countdownLabel.setText(COUNTDOWN_LBL + start);
