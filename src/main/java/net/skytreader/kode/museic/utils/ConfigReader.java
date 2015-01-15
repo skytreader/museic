@@ -11,9 +11,18 @@ public class ConfigReader{
     
     private Properties configFile;
     
+    /**
+    Use this if you are loading from an existing config file.
+    */
     public ConfigReader(Reader r) throws IOException{
         configFile = new Properties();
         configFile.load(r);
+    }
+
+    /**
+    Use this if you will be creating a new config file.
+    */
+    public ConfigReader(){
     }
     
     /**

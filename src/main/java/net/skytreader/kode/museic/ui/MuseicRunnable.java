@@ -47,7 +47,8 @@ public class MuseicRunnable implements Runnable{
     private JLabel filePathLabel;
     private JProgressBar seekBar;
     private JTextField delayField;
-
+    
+    private ConfigReader cfgReader;
     private Player museicPlayer;
 
     private final int DEFAULT_DELAY = 4;
@@ -73,12 +74,13 @@ public class MuseicRunnable implements Runnable{
 
         if(configFile.exists()){
             BufferedReader cfgBr = new BufferedReader(new InputStreamReader(new FileInputStream(configFile)));
-            ConfigReader cfgReader = new ConfigReader(cfgBr);
-            // Then set stuff here
+            cfgReader = new ConfigReader(cfgBr);
+            mp3Chooser.setCurrentDirectory(new File(cfgReader.getLastLoadDirectory()));
         } else{
+            cfgReader = new ConfigReader();
         }
     }
-    
+   
     @Override
     public void run(){
 
