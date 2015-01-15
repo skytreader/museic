@@ -6,7 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Component;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 import javafx.embed.swing.JFXPanel;
 
@@ -26,6 +31,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import net.skytreader.kode.museic.core.JFXPlayer;
 import net.skytreader.kode.museic.core.Player;
+
+import net.skytreader.kode.museic.utils.ConfigReader;
 
 public class MuseicRunnable implements Runnable{
     private Component parentComponent;
@@ -53,13 +60,23 @@ public class MuseicRunnable implements Runnable{
     private final String DELAY_CONFIG_LBL = "Delay (in seconds): ";
     private final String COUNTDOWN_LBL = "Playing in: ";
 
-    public MuseicRunnable(){
+    public MuseicRunnable(String configFilePath) throws FileNotFoundException,
+      IOException{
         JFXPanel foo = new JFXPanel();
         museicPlayer = new JFXPlayer();
         mp3Chooser = new JFileChooser();
         FileNameExtensionFilter mp3Filter = new FileNameExtensionFilter(
           "MP3 Files", "mp3");
         mp3Chooser.setFileFilter(mp3Filter);
+
+        File configFile = new File(configFilePath);
+
+        if(configFile.exists()){
+            BufferedReader cfgBr = new BufferedReader(new InputStreamReader(new FileInputStream(configFile)));
+            ConfigReader cfgReader = new ConfigReader(cfgBr);
+            // Then set stuff here
+        } else{
+        }
     }
     
     @Override

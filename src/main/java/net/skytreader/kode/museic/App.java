@@ -13,9 +13,13 @@ import net.skytreader.kode.museic.ui.MuseicRunnable;
 public class App{
     
     public static final String APP_NAME = "Museic";
+    public static final String CONFIG_FILE = ".museic";
 
     public static void main(String[] args) throws Exception{
+        String separator = System.getProperty("file.seperator");
+        String homeDir = System.getProperty("user.home");
+        String configFull = homeDir + separator + CONFIG_FILE;
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        EventQueue.invokeLater(new MuseicRunnable());
+        EventQueue.invokeLater(new MuseicRunnable(configFull));
     }
 }
