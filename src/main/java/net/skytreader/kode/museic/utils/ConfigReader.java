@@ -23,6 +23,7 @@ public class ConfigReader{
     Use this if you will be creating a new config file.
     */
     public ConfigReader(){
+        configFile = new Properties();
     }
     
     /**

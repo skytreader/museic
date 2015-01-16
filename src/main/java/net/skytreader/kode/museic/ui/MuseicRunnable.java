@@ -164,6 +164,15 @@ public class MuseicRunnable implements Runnable{
 
             if(resultVal == JFileChooser.APPROVE_OPTION){
                 File f = mp3Chooser.getSelectedFile();
+                cfgReader.setConfig("last-load-directory", f.getAbsolutePath());
+                // Actually, I think we should do this on close rather than on every config change.
+                try{
+                    cfgReader.writeOutConfig(System.getProperty("user.home") +
+                      System.getProperty("file.separator") +
+                      net.skytreader.kode.museic.App.CONFIG_FILE);
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
                 filePathLabel.setText(FILEPATH_INDICATOR_LBL + f.getName());
                 filePathState = f.getAbsolutePath();
                 setButtonsStopped();
