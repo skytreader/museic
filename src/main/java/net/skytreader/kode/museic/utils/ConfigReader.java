@@ -45,5 +45,6 @@ public class ConfigReader{
       IOException{
         PrintWriter pw = new PrintWriter(new FileWriter(filepath));
         configFile.list(pw);
+        pw.close();
     }
 }
