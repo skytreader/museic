@@ -106,7 +106,7 @@ public class MuseicRunnable implements Runnable{
         delayPanel.add(delayField);
         mainFrameContainer.add(delayPanel);
 
-        countdownLabel = new JLabel(COUNTDOWN_LBL + "NA");
+        countdownLabel = new JLabel(COUNTDOWN_LBL + "Stopped");
         mainFrameContainer.add(countdownLabel);
 
         seekBar = new JProgressBar();
@@ -134,6 +134,7 @@ public class MuseicRunnable implements Runnable{
     Call this whenever the status of the Player is STATUS_STOPPED.
     */
     private void setButtonsStopped(){
+        countdownLabel.setText(COUNTDOWN_LBL + "Stopped");
         play.setEnabled(true);
         pause.setEnabled(false);
         stop.setEnabled(false);
@@ -152,6 +153,7 @@ public class MuseicRunnable implements Runnable{
     Call this whenever the status of the Player is STATUS_PAUSED.
     */
     private void setButtonsPaused(){
+        countdownLabel.setText(COUNTDOWN_LBL + "Paused");
         play.setEnabled(true);
         pause.setEnabled(false);
         stop.setEnabled(true);
