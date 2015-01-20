@@ -175,6 +175,7 @@ public class MuseicRunnable implements Runnable{
                 }
                 filePathLabel.setText(FILEPATH_INDICATOR_LBL + f.getName());
                 filePathState = f.getAbsolutePath();
+                museicPlayer.stop();
                 setButtonsStopped();
             }
         }

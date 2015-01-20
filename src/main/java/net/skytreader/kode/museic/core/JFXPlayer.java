@@ -39,14 +39,20 @@ public class JFXPlayer implements Player{
 
     @Override
     public void pause(){
-        player.pause();
-        currentStatus = Player.STATUS_PAUSED;
+        if(player == null){
+        } else{
+            player.pause();
+            currentStatus = Player.STATUS_PAUSED;
+        }
     }
 
     @Override
     public void stop(){
-        player.stop();
-        currentStatus = Player.STATUS_STOPPED;
+        if(player == null){
+        } else{
+            player.stop();
+            currentStatus = Player.STATUS_STOPPED;
+        }
     }
 
     @Override
