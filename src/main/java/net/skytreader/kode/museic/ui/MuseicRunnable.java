@@ -205,6 +205,24 @@ public class MuseicRunnable implements Runnable{
             int delay = Integer.parseInt(delayField.getText());
             TimerStoppable ts = new TimerStoppable(delay);
             ts.startTimer();
+            new Thread(new DurationChecker()).start();
+        }
+    }
+
+    private class DurationChecker implements Runnable{
+        @Override
+        public void run(){
+            while(true){
+                if(museicPlayer.isDonePlaying()){
+                    setButtonsStopped();
+                    break;
+                }
+                try{
+                    Thread.sleep(1000);
+                } catch(InterruptedException ie){
+                    ie.printStackTrace();
+                }
+            }
         }
     }
 
