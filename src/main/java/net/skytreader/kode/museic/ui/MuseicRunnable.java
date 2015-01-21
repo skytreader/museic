@@ -213,10 +213,12 @@ public class MuseicRunnable implements Runnable{
         public void run(){
             while(true){
                 if(museicPlayer.isDonePlaying()){
+                    System.out.println("Stopping...");
                     museicPlayer.stop();
                     setButtonsStopped();
                     break;
                 }
+                System.out.println("Not yet done.");
                 try{
                     Thread.sleep(1000);
                 } catch(InterruptedException ie){

@@ -69,7 +69,9 @@ public class JFXPlayer implements Player{
     @Override
     public boolean isDonePlaying(){
         Duration totalLength = player.getTotalDuration();
-        return totalLength.equals(player.getCurrentTime());
+        Duration now = player.getCurrentTime();
+        System.out.println(totalLength + " vs " + now);
+        return totalLength.toMillis() <= now.toMillis();
     }
 
 }
