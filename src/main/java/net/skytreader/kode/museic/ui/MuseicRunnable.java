@@ -205,7 +205,6 @@ public class MuseicRunnable implements Runnable{
             int delay = Integer.parseInt(delayField.getText());
             TimerStoppable ts = new TimerStoppable(delay);
             ts.startTimer();
-            new Thread(new DurationChecker()).start();
         }
     }
 
@@ -214,6 +213,7 @@ public class MuseicRunnable implements Runnable{
         public void run(){
             while(true){
                 if(museicPlayer.isDonePlaying()){
+                    museicPlayer.stop();
                     setButtonsStopped();
                     break;
                 }
@@ -259,6 +259,7 @@ public class MuseicRunnable implements Runnable{
                     museicPlayer.play();
                 } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
                     museicPlayer.play(filePathState);
+                    new Thread(new DurationChecker()).start();
                 }
                 setButtonsPlaying();
                 stopper.stopTimer();
