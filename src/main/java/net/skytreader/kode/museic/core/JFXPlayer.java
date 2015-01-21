@@ -5,6 +5,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import javafx.util.Duration;
+
 public class JFXPlayer implements Player{
     private MediaPlayer player;
     private int currentStatus;
@@ -58,6 +60,12 @@ public class JFXPlayer implements Player{
     @Override
     public int getCurrentStatus(){
         return currentStatus;
+    }
+
+    @Override
+    public boolean isDonePlaying(){
+        Duration totalLength = player.getTotalDuration();
+        return totalLength.equals(player.getCurrentTime());
     }
 
 }

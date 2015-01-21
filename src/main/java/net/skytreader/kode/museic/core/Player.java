@@ -33,4 +33,8 @@ public interface Player{
     Stop whatever is playing, if any.
     */
     public void stop();
+    /**
+    Returns true if the track is done playing.
+    */
+    public boolean isDonePlaying();
 }
