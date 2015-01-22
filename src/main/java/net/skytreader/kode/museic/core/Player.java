@@ -1,7 +1,7 @@
 package net.skytreader.kode.museic.core;
 
 /**
-Players are stateful objects.
+Warning: Players are stateful objects.
 
 @author Chad Estioco
 */
@@ -34,7 +34,9 @@ public interface Player{
     */
     public void stop();
     /**
-    Returns true if the track is done playing.
+    For the last succesful track loaded via play(String), return the track length
+    in seconds. If play(String) has never been called before, return a negative
+    value.
     */
-    public boolean isDonePlaying();
+    public int getTrackLength();
 }

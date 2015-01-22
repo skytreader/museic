@@ -66,12 +66,20 @@ public class JFXPlayer implements Player{
     This will throw a NullPointerException if play(String) hasn't even been called
     once.
     */
-    @Override
     public boolean isDonePlaying(){
         Duration totalLength = player.getTotalDuration();
         Duration now = player.getCurrentTime();
         System.out.println(totalLength + " vs " + now);
         return totalLength.toMillis() <= now.toMillis();
+    }
+
+    @Override
+    public int getTrackLength(){
+        if(player == null){
+            return -1;
+        }
+        Duration totalLength = player.getTotalDuration();
+        return ((int) totalLength.toSeconds()) + 1;
     }
 
 }

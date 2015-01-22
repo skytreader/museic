@@ -208,11 +208,16 @@ public class MuseicRunnable implements Runnable{
         }
     }
 
+    /**
+    Note: This method is very prone to race conditions. Also, handle pauses and
+    stops.
+    */
     private class DurationChecker implements Runnable{
+        private int secondsElapsed = 0;
         @Override
         public void run(){
             while(true){
-                if(museicPlayer.isDonePlaying()){
+                if(secondsElapsed == museicPlayer.getTrackLength()){
                     System.out.println("Stopping...");
                     museicPlayer.stop();
                     setButtonsStopped();
@@ -224,6 +229,7 @@ public class MuseicRunnable implements Runnable{
                 } catch(InterruptedException ie){
                     ie.printStackTrace();
                 }
+                secondsElapsed++;
             }
         }
     }
