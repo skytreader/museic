@@ -209,8 +209,7 @@ public class MuseicRunnable implements Runnable{
     }
 
     /**
-    Note: This method is very prone to race conditions. Also, handle pauses and
-    stops.
+    Note: This method is very prone to race conditions.
     */
     private class DurationChecker implements Runnable{
         private int secondsElapsed = 0;
@@ -229,7 +228,9 @@ public class MuseicRunnable implements Runnable{
                 } catch(InterruptedException ie){
                     ie.printStackTrace();
                 }
-                secondsElapsed++;
+                if(museicPlayer.getCurrentStatus() == Player.STATUS_PLAYING){
+                    secondsElapsed++;
+                }
             }
         }
     }
