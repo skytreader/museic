@@ -133,7 +133,7 @@ public class MuseicRunnable implements Runnable{
     /**
     Call this whenever the status of the Player is STATUS_STOPPED.
     */
-    private void setButtonsStopped(){
+    private void setUIStateStopped(){
         countdownLabel.setText(COUNTDOWN_LBL + "Stopped");
         play.setEnabled(true);
         pause.setEnabled(false);
@@ -143,7 +143,7 @@ public class MuseicRunnable implements Runnable{
     /**
     Call this whenever the status of the Player is STATUS_PLAYING.
     */
-    private void setButtonsPlaying(){
+    private void setUIStatePlaying(){
         play.setEnabled(false);
         pause.setEnabled(true);
         stop.setEnabled(true);
@@ -152,7 +152,7 @@ public class MuseicRunnable implements Runnable{
     /**
     Call this whenever the status of the Player is STATUS_PAUSED.
     */
-    private void setButtonsPaused(){
+    private void setUIStatePaused(){
         countdownLabel.setText(COUNTDOWN_LBL + "Paused");
         play.setEnabled(true);
         pause.setEnabled(false);
@@ -178,7 +178,7 @@ public class MuseicRunnable implements Runnable{
                 filePathLabel.setText(FILEPATH_INDICATOR_LBL + f.getName());
                 filePathState = f.getAbsolutePath();
                 museicPlayer.stop();
-                setButtonsStopped();
+                setUIStateStopped();
             }
         }
     }
@@ -219,7 +219,7 @@ public class MuseicRunnable implements Runnable{
                 if(secondsElapsed == museicPlayer.getTrackLength()){
                     System.out.println("Stopping...");
                     museicPlayer.stop();
-                    setButtonsStopped();
+                    setUIStateStopped();
                     break;
                 }
                 System.out.println("Not yet done.");
@@ -239,7 +239,7 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             museicPlayer.pause();
-            setButtonsPaused();
+            setUIStatePaused();
         }
     }
 
@@ -247,7 +247,7 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             museicPlayer.stop();
-            setButtonsStopped();
+            setUIStateStopped();
         }
     }
 
@@ -270,7 +270,7 @@ public class MuseicRunnable implements Runnable{
                     museicPlayer.play(filePathState);
                     new Thread(new DurationChecker()).start();
                 }
-                setButtonsPlaying();
+                setUIStatePlaying();
                 stopper.stopTimer();
             } else{
                 countdownLabel.setText(COUNTDOWN_LBL + start);
