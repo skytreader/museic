@@ -79,6 +79,7 @@ public class JFXPlayer implements Player{
             return -1;
         }
         Duration totalLength = player.getTotalDuration();
+        System.out.println("track duration is " + totalLength);
         return ((int) totalLength.toSeconds()) + 1;
     }
 
