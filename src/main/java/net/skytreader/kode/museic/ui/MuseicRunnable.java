@@ -22,7 +22,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
@@ -45,7 +45,7 @@ public class MuseicRunnable implements Runnable{
     private JFrame mainFrame;
     private JLabel countdownLabel;
     private JLabel filePathLabel;
-    private JProgressBar seekBar;
+    private JSlider seekBar;
     private JTextField delayField;
     
     private ConfigReader cfgReader;
@@ -109,7 +109,10 @@ public class MuseicRunnable implements Runnable{
         countdownLabel = new JLabel(COUNTDOWN_LBL + "Stopped");
         mainFrameContainer.add(countdownLabel);
 
-        seekBar = new JProgressBar();
+        seekBar = new JSlider();
+        seekBar.setMaximum(0);
+        seekBar.setMinimum(0);
+        seekBar.setValue(0);
         mainFrameContainer.add(seekBar);
 
         JPanel controlPanel = new JPanel();
@@ -217,12 +220,10 @@ public class MuseicRunnable implements Runnable{
         public void run(){
             while(true){
                 if(secondsElapsed == museicPlayer.getTrackLength()){
-                    System.out.println("Stopping...");
                     museicPlayer.stop();
                     setUIStateStopped();
                     break;
                 }
-                System.out.println("Not yet done.");
                 try{
                     Thread.sleep(1000);
                 } catch(InterruptedException ie){
@@ -230,6 +231,7 @@ public class MuseicRunnable implements Runnable{
                 }
                 if(museicPlayer.getCurrentStatus() == Player.STATUS_PLAYING){
                     secondsElapsed++;
+                    seekBar.setValue(seekBar.getValue() + 1);
                 }
             }
         }
@@ -268,6 +270,7 @@ public class MuseicRunnable implements Runnable{
                     museicPlayer.play();
                 } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
                     museicPlayer.play(filePathState);
+                    seekBar.setMaximum(museicPlayer.getTrackLength());
                     new Thread(new DurationChecker()).start();
                 }
                 setUIStatePlaying();
