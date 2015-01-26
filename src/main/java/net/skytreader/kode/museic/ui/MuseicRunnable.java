@@ -219,7 +219,6 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void run(){
             while(true){
-                System.out.println("Duration checker length: " + museicPlayer.getTrackLength());
                 if(secondsElapsed == museicPlayer.getTrackLength()){
                     museicPlayer.stop();
                     setUIStateStopped();
@@ -271,7 +270,6 @@ public class MuseicRunnable implements Runnable{
                     museicPlayer.play();
                 } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
                     museicPlayer.play(filePathState);
-                    System.out.println("track length is: " + museicPlayer.getTrackLength());
                     seekBar.setMaximum(museicPlayer.getTrackLength());
                     new Thread(new DurationChecker()).start();
                 }

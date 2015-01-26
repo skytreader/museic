@@ -76,7 +76,6 @@ public class JFXPlayer implements Player{
     public boolean isDonePlaying(){
         Duration totalLength = player.getTotalDuration();
         Duration now = player.getCurrentTime();
-        System.out.println(totalLength + " vs " + now);
         return totalLength.toMillis() <= now.toMillis();
     }
 
@@ -86,7 +85,6 @@ public class JFXPlayer implements Player{
             return -1;
         }
         Duration totalLength = player.getTotalDuration();
-        System.out.println("track duration is " + totalLength);
         return ((int) totalLength.toSeconds()) + 1;
     }
 
