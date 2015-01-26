@@ -27,8 +27,7 @@ public class JFXPlayer implements Player{
         Media mp3 = new Media(fileURI);
         player = new MediaPlayer(mp3);
         player.play();
-        while(player.getStatus() != MediaPlayer.Status.READY){
-            System.out.println(player.getStatus());
+        while(player.getStatus() == MediaPlayer.Status.UNKNOWN){
             try{
                 Thread.sleep(1000);
             } catch(InterruptedException ie){
