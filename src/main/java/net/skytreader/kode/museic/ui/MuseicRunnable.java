@@ -222,7 +222,7 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void run(){
             while(true){
-                if(secondsElapsed == museicPlayer.getTrackLength()){
+                if(museicPlayer.getCurrentStatus() != Player.STATUS_PLAYING){
                     museicPlayer.stop();
                     setUIStateStopped();
                     break;
