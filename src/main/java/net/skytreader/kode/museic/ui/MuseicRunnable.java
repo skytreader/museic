@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Component;
+import java.awt.Font;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,7 +60,6 @@ public class MuseicRunnable implements Runnable{
     // Label prefixes
     private final String FILEPATH_INDICATOR_LBL = "Loaded: ";
     private final String DELAY_CONFIG_LBL = "Delay (in seconds): ";
-    private final String COUNTDOWN_LBL = "Playing in: ";
 
     public MuseicRunnable(String configFilePath) throws FileNotFoundException,
       IOException{
@@ -106,7 +106,7 @@ public class MuseicRunnable implements Runnable{
         delayPanel.add(delayField);
         mainFrameContainer.add(delayPanel);
 
-        countdownLabel = new JLabel(COUNTDOWN_LBL + "Stopped");
+        countdownLabel = new JLabel("Stopped");
         mainFrameContainer.add(countdownLabel);
 
         seekBar = new JSlider();
@@ -137,7 +137,7 @@ public class MuseicRunnable implements Runnable{
     Call this whenever the status of the Player is STATUS_STOPPED.
     */
     private void setUIStateStopped(){
-        countdownLabel.setText(COUNTDOWN_LBL + "Stopped");
+        countdownLabel.setText("Stopped");
         play.setEnabled(true);
         pause.setEnabled(false);
         stop.setEnabled(false);
@@ -156,7 +156,7 @@ public class MuseicRunnable implements Runnable{
     Call this whenever the status of the Player is STATUS_PAUSED.
     */
     private void setUIStatePaused(){
-        countdownLabel.setText(COUNTDOWN_LBL + "Paused");
+        countdownLabel.setText("Paused");
         play.setEnabled(true);
         pause.setEnabled(false);
         stop.setEnabled(true);
@@ -265,7 +265,7 @@ public class MuseicRunnable implements Runnable{
         @Override
         public void actionPerformed(ActionEvent ae){
             if(start == 0){
-                countdownLabel.setText(COUNTDOWN_LBL + "Now Playing");
+                countdownLabel.setText("Playing");
                 if(museicPlayer.getCurrentStatus() == Player.STATUS_PAUSED){
                     museicPlayer.play();
                 } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
@@ -276,7 +276,7 @@ public class MuseicRunnable implements Runnable{
                 setUIStatePlaying();
                 stopper.stopTimer();
             } else{
-                countdownLabel.setText(COUNTDOWN_LBL + start);
+                countdownLabel.setText(start);
                 start--;
             }
         }
