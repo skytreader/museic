@@ -66,7 +66,17 @@ public class JFXPlayer implements Player{
 
     @Override
     public int getCurrentStatus(){
-        return currentStatus;
+        if(player == null){
+            return Player.STATUS_STOPPED;
+        }
+
+        if(player.getStatus() == MediaPlayer.Status.PLAYING){
+            return Player.STATUS_PLAYING;
+        } else if(player.getStatus() == MediaPlayer.Status.PAUSED){
+            return Player.STATUS_PAUSED;
+        } else{
+            return Player.STATUS_STOPPED;
+        }
     }
 
     /**
