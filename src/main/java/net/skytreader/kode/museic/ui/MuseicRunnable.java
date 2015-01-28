@@ -107,6 +107,9 @@ public class MuseicRunnable implements Runnable{
         mainFrameContainer.add(delayPanel);
 
         countdownLabel = new JLabel("Stopped");
+        Font countdownFont = countdownLabel.getFont();
+        countdownLabel.setFont(new Font(countdownFont.getFontName(), countdownFont.getStyle(), 25));
+        countdownLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainFrameContainer.add(countdownLabel);
 
         seekBar = new JSlider();
@@ -276,7 +279,7 @@ public class MuseicRunnable implements Runnable{
                 setUIStatePlaying();
                 stopper.stopTimer();
             } else{
-                countdownLabel.setText(start);
+                countdownLabel.setText("" + start);
                 start--;
             }
         }
