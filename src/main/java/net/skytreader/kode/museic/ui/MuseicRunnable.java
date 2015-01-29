@@ -135,7 +135,7 @@ public class MuseicRunnable implements Runnable{
 
         mainFrame.setVisible(true);
     }
-    
+
     /**
     Call this whenever the status of the Player is STATUS_STOPPED.
     */
@@ -272,8 +272,9 @@ public class MuseicRunnable implements Runnable{
                 if(museicPlayer.getCurrentStatus() == Player.STATUS_PAUSED){
                     museicPlayer.play();
                 } else if(museicPlayer.getCurrentStatus() == Player.STATUS_STOPPED){
-                    museicPlayer.play(filePathState);
+                    seekBar.setValue(0);
                     seekBar.setMaximum(museicPlayer.getTrackLength());
+                    museicPlayer.play(filePathState);
                     new Thread(new DurationChecker()).start();
                 }
                 setUIStatePlaying();
